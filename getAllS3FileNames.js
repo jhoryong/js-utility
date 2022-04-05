@@ -9,7 +9,8 @@ function getAllS3FileNames(baseUrl) {
     let fileText = '';
     fileNameArr.forEach((fileName) => { fileText += fileName + '\n' });
     console.log(fileText);
-    
+
+    // if baseUrl exists, print full url of files    
     if (baseUrl) {
         const url = window.location.href;
         const filePath = url.split('&')[1].split('=')[1]; // Extract file path from url
