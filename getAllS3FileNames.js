@@ -4,6 +4,7 @@
  * @param {string} baseUrl - ex) https://{bucketName}.s3.ap-northeast-2.amazonaws.com/
  */
 function getAllS3FileNames(baseUrl) {
+    // print all filenames
     const nodeList = document.querySelectorAll('.name.object.latest.object-name');
     const fileNameArr = Array.from(nodeList, e => e.textContent); // File name array
     let fileText = '';
