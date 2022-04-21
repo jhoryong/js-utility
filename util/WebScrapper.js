@@ -1,11 +1,10 @@
-import fs from 'fs';
 
-/**
- * Get all file names and their urls from S3 files list page
+/** Get all file names and their urls from s3 files list page
  * @param {string} baseUrl - ex) https://{bucket name}.s3.ap-northeast-2.amazonaws.com/
- * @param {string} extension - Add extension you want to specify. ex) 'mp3'
- */
-function getAllS3FileNames(baseUrl, extension, isWriteTextFile) {
+ * @param {string} extension - Add extension you want to specify. ex) 'mp3' 
+ * */
+
+function getAllS3FileNames(baseUrl, extension) {
     // Get array of file names
     const nodeList = document.querySelectorAll('.name.object.latest.object-name');
     let fileNameArr = Array.from(nodeList, e => e.textContent);
@@ -30,11 +29,4 @@ function getAllS3FileNames(baseUrl, extension, isWriteTextFile) {
         fileNameArr.forEach((fileName) => { urlText += baseUrl + filePath + fileName + '\n' });
         console.log(urlText);
     }
-    
-    // if (isWriteTextFile) saveTextFile(urlText);
-}
-
-function saveTextFile(string) {
-    const file = fs.createWriteStream('urls.txt');
-    file.write(string);
 }

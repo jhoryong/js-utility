@@ -1,8 +1,9 @@
 {
   "name": "js-utility",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "main.js",
   "repository": "https://github.com/jhoryong/js-utility.git",
   "author": "Horyong Jung <jhoryong@logibros.com>",
-  "license": "MIT"
+  "license": "MIT",
+  "type": "module"
 }

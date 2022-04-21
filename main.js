@@ -1,5 +1,7 @@
 const https = require('https');
 const fs = require('fs');
+const TextConverter = require('./util/TextConverter')
+const FileSystem = require('./util/FileSystem')
 const table = require('./data/table.js')
 
 //https://www.codegrepper.com/code-examples/javascript/js+read+file+line+by+line+into+array
@@ -9,7 +11,7 @@ async function convertTextToArray(filename) {
             if(err) throw err;
 
             const arr = data.toString().replace(/\r\n/g,'\n').split('\n');
-            console.log(result)
+            console.log(arr)
             resolve(arr);
         })
     })
@@ -40,7 +42,7 @@ function mkdir(dirName) {
 
 async function downloadUrls() {
     // txt 파일의 url 을 array 로 변환
-    const result = await convertTextToArray('urls.txt')
+    const result = await convertTextToArray('txt/urls.txt')
     
     // 폴더생성
     const dir = `./json`
@@ -85,15 +87,19 @@ async function replaceUrl() {
 
     filesArr.forEach(async function(filename){
         const file = await require(`./json/${filename}`)
-        if (!table[file.images]) {
+        if (table[file.images[0]]) {
+            console.log(`success on ${filename}`);
+        }
+        if (!table[file.images[0]]) {
             console.log(`fail on ${filename}`);
             return;
         }
-        file.images = table[file.images];
+        file.images[0] = table[file.images];
         fs.writeFile(`./json/${filename}`, JSON.stringify(file), function(err) {
             if (err) return console.log(err, filename);
         })
     })
     
 }
+// replaceUrl();
 replaceUrl();
